@@ -4,25 +4,28 @@ from matplotlib import pyplot as plt
 
 
 def show_original_image(picture_name):
-    img1 = Image.open(picture_name)
-    img1.show()
+    img = Image.open(picture_name)
+    img.show()
+
 
 def show_left_image(picture_name):
-    picture_name = Image.open(picture_name)
-    rotate_left_img = picture_name.rotate(90)
+    img = Image.open(picture_name)
+    rotate_left_img = img.rotate(90)
     rotate_left_img.show()
 
+
 def show_right_image(picture_name):
-    picture_name = Image.open(picture_name)
-    rotate_right_img = picture_name.rotate(-90)
+    img = Image.open(picture_name)
+    rotate_right_img = img.rotate(-90)
     rotate_right_img.show()
 
 
 def show_gray_image(picture_name):
-
-    img2 = cv2.imread('girl.jpg', cv2.IMREAD_GRAYSCALE)
-    cv2.imshow('girl.jpg', img2)
+    img = cv2.imread(picture_name, cv2.IMREAD_GRAYSCALE)
+    cv2.imshow('girl.jpg', img)
     cv2.waitKey(0)
+
+
 #
 # # ---------------------------------
 # img3=cv2.imread('girl.jpg', 0)
@@ -55,18 +58,25 @@ top_frame.pack()
 bottom_frame = tk.Frame(window)
 bottom_frame.pack(side=tk.BOTTOM)
 
+
 # 建立事件處理函式（event handler），透過元件 command 參數存取
-def event_by_black_button():
-    show_original_image('girl.jpg')
+
 
 def event_by_red_button():
     show_left_image('girl.jpg')
 
+
 def event_by_green_button():
     show_right_image('girl.jpg')
 
+
 def event_by_blue_button():
     show_gray_image('girl.jpg')
+
+
+def event_by_black_button():
+    show_original_image('girl.jpg')
+
 
 # 以下為 top 群組
 left_button = tk.Button(top_frame, text='左轉90', fg='red', command=event_by_red_button)
@@ -76,7 +86,6 @@ left_button.pack(side=tk.LEFT)
 middle_button = tk.Button(top_frame, text='右轉90', fg='green', command=event_by_green_button)
 middle_button.pack(side=tk.LEFT)
 
-#
 # # 以下為 bottom 群組
 right_button = tk.Button(top_frame, text='彩色轉灰階', fg='blue', command=event_by_blue_button)
 right_button.pack(side=tk.LEFT)
