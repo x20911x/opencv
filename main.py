@@ -15,18 +15,21 @@ def cancel_img_show(time_of_cancel=3):
 def show_original_image(picture_name):
     img = Image.open(picture_name)
     img.show()
+    return img
 
 
 def show_left_image(picture_name):
     img = Image.open(picture_name)
     rotate_left_img = img.rotate(90)
     rotate_left_img.show()
+    return rotate_left_img
 
 
 def show_right_image(picture_name):
     img = Image.open(picture_name)
     rotate_right_img = img.rotate(-90)
     rotate_right_img.show()
+    return rotate_right_img
 
 
 def show_gray_image(picture_name):
@@ -74,37 +77,39 @@ bottom_frame.pack(side=tk.BOTTOM)
 
 def event_by_red_button():
     show_left_image('girl.jpg')
+    cancel_img_show()
 
 
 def event_by_green_button():
     show_right_image('girl.jpg')
+    cancel_img_show()
 
 
 def event_by_blue_button():
     show_gray_image('girl.jpg')
+    cancel_img_show()
 
 
 def event_by_black_button():
     show_original_image('girl.jpg')
+    cancel_img_show()
 
 
 # 以下為 top 群組
+first_button = tk.Button(top_frame, text='原圖', fg='black', command=event_by_black_button)
+# 讓系統自動擺放元件，預設為由上而下（靠左）
+first_button.pack(side=tk.LEFT)
+
 left_button = tk.Button(top_frame, text='左轉90', fg='red', command=event_by_red_button)
 # 讓系統自動擺放元件，預設為由上而下（靠左）
 left_button.pack(side=tk.LEFT)
 
-middle_button = tk.Button(top_frame, text='右轉90', fg='green', command=event_by_green_button)
-middle_button.pack(side=tk.LEFT)
+right_button = tk.Button(top_frame, text='右轉90', fg='green', command=event_by_green_button)
+right_button.pack(side=tk.LEFT)
 
 # # 以下為 bottom 群組
-right_button = tk.Button(top_frame, text='彩色轉灰階', fg='blue', command=event_by_blue_button)
-right_button.pack(side=tk.LEFT)
-#
-#
-# bottom_button = tk.Button(top_frame, text='顯示原圖', fg='black', command=event_by_black_button)
-# bottom_button.pack(side=tk.LEFT)
-#
-
+gray_button = tk.Button(bottom_frame, text='彩色轉灰階', fg='gray', command=event_by_blue_button)
+gray_button.pack(side=tk.LEFT)
 
 # 讓系統自動擺放元件（靠下方）
 # bottom_button.pack(side=tk.BOTTOM)
