@@ -1,5 +1,4 @@
 from PIL import Image
-import cv2
 import psutil
 import time
 from matplotlib import pyplot as plt
@@ -43,6 +42,7 @@ def divide_img_threshold(picture_name, threshold=127):
 
 def combine_all_img(picture_name):
     titles = ['original', 'rotate_right', 'rotate_left', 'grayscale', 'BINARY']
+
     images = [show_original_image('girl.jpg'),
               show_right_image('girl.jpg'),
               show_left_image('girl.jpg'),
@@ -53,9 +53,7 @@ def combine_all_img(picture_name):
     for i in range(5):
         plt.subplot(2, 3, i + 1), plt.imshow(images[i], 'gray')
         plt.title(titles[i])
-
         plt.yticks([]), plt.xticks([])
-
     plt.show()
 
 
@@ -69,7 +67,7 @@ window = tk.Tk()
 top_frame = tk.Frame(window)
 
 # 將元件分為 top/bottom 兩群並加入主視窗
-top_frame.pack()
+top_frame.pack(side=tk.TOP)
 
 bottom_frame = tk.Frame(window)
 bottom_frame.pack(side=tk.BOTTOM)
@@ -98,6 +96,16 @@ def event_by_black_button():
     cancel_img_show()
 
 
+def event_by_purple_button():
+    divide_img_threshold('girl.jpg').show()
+    cancel_img_show()
+
+
+def event_by_pink_button():
+    combine_all_img('girl.jpg')
+
+
+
 # 以下為 top 群組
 first_button = tk.Button(top_frame, text='原圖', fg='black', command=event_by_black_button)
 # 讓系統自動擺放元件，預設為由上而下（靠左）
@@ -113,6 +121,12 @@ right_button.pack(side=tk.LEFT)
 # # 以下為 bottom 群組
 gray_button = tk.Button(bottom_frame, text='彩色轉灰階', fg='gray', command=event_by_blue_button)
 gray_button.pack(side=tk.LEFT)
+
+purple_button = tk.Button(bottom_frame, text='二值化', fg='purple', command=event_by_purple_button)
+purple_button.pack(side=tk.LEFT)
+
+combine_buttion = tk.Button(bottom_frame, text='combine all results', fg='pink', command=event_by_pink_button)
+combine_buttion.pack(side=tk.LEFT)
 
 # 讓系統自動擺放元件（靠下方）
 # bottom_button.pack(side=tk.BOTTOM)
