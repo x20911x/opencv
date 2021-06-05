@@ -14,21 +14,18 @@ def cancel_img_show(time_of_cancel=3):
 
 def show_original_image(picture_name):
     img = Image.open(picture_name)
-    img.show()
     return img
 
 
 def show_left_image(picture_name):
     img = Image.open(picture_name)
     rotate_left_img = img.rotate(90)
-    rotate_left_img.show()
     return rotate_left_img
 
 
 def show_right_image(picture_name):
     img = Image.open(picture_name)
     rotate_right_img = img.rotate(-90)
-    rotate_right_img.show()
     return rotate_right_img
 
 
@@ -76,22 +73,22 @@ bottom_frame.pack(side=tk.BOTTOM)
 
 
 def event_by_red_button():
-    show_left_image('girl.jpg')
+    show_left_image('girl.jpg').show()
     cancel_img_show()
 
 
 def event_by_green_button():
-    show_right_image('girl.jpg')
+    show_right_image('girl.jpg').show()
     cancel_img_show()
 
 
 def event_by_blue_button():
-    show_gray_image('girl.jpg')
+    show_gray_image('girl.jpg').show()
     cancel_img_show()
 
 
 def event_by_black_button():
-    show_original_image('girl.jpg')
+    show_original_image('girl.jpg').show()
     cancel_img_show()
 
 
