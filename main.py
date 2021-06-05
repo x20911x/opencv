@@ -1,6 +1,15 @@
 from PIL import Image
 import cv2
+import psutil
+import time
 from matplotlib import pyplot as plt
+
+
+def cancel_img_show(time_of_cancel=3):
+    time.sleep(time_of_cancel)
+    for proc in psutil.process_iter():
+        if proc.name() == "display":
+            proc.kill()
 
 
 def show_original_image(picture_name):
@@ -21,9 +30,10 @@ def show_right_image(picture_name):
 
 
 def show_gray_image(picture_name):
-    img = cv2.imread(picture_name, cv2.IMREAD_GRAYSCALE)
-    cv2.imshow('girl.jpg', img)
-    cv2.waitKey(0)
+    img = Image.open(picture_name)
+    img = img.convert('LA')
+    img.show()
+    return img
 
 
 #
