@@ -31,27 +31,33 @@ def show_right_image(picture_name):
 
 def show_gray_image(picture_name):
     img = Image.open(picture_name)
-    img = img.convert('LA')
-    img.show()
+    img = img.convert('L')
     return img
 
 
-#
-# # ---------------------------------
-# img3=cv2.imread('girl.jpg', 0)
-# # 灰階大於127 轉 255
-# ret, th1 = cv2.threshold(img3, 127, 255, cv2.THRESH_BINARY)
-#
-# titles=['original', 'rotate_right', 'rotate_left', 'black','BINARY']
-# images = [img1, rotate_right_img, rotate_left_img, img2, th1]
-#
-# for i in range(5):
-#     plt.subplot(2, 3, i+1), plt.imshow(images[i], 'gray')
-#     plt.title(titles[i])
-#
-#     # plt.yticks([]), plt.xticks([])
-#
-# plt.show()
+def divide_img_threshold(picture_name, threshold=127):
+    divide_value_list = [0 if i < threshold else 1 for i in range(256)]
+    img = show_gray_image(picture_name).point(divide_value_list, '1')
+    return img
+
+
+def combine_all_img(picture_name):
+    titles = ['original', 'rotate_right', 'rotate_left', 'grayscale', 'BINARY']
+    images = [show_original_image('girl.jpg'),
+              show_right_image('girl.jpg'),
+              show_left_image('girl.jpg'),
+              show_gray_image('girl.jpg'),
+              divide_img_threshold(picture_name, threshold=127)
+              ]
+
+    for i in range(5):
+        plt.subplot(2, 3, i + 1), plt.imshow(images[i], 'gray')
+        plt.title(titles[i])
+
+        plt.yticks([]), plt.xticks([])
+
+    plt.show()
+
 
 # ------------------------------------------------
 
